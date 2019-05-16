@@ -90,6 +90,74 @@ paths:
       security:
         - PSUOAuth2Security:
             - accounts
+  '/accounts/{AccountId}/party':
+    get:
+      tags:
+        - Parties
+      summary: Get Parties
+      operationId: GetAccountsAccountIdParty
+      parameters:
+        - $ref: '#/parameters/AccountId'
+        - $ref: '#/parameters/x-fapi-auth-date'
+        - $ref: '#/parameters/x-fapi-customer-ip-address'
+        - $ref: '#/parameters/x-fapi-interaction-id'
+        - $ref: '#/parameters/Authorization'
+      responses:
+        '200':
+          $ref: '#/responses/200AccountsAccountIdPartyRead'
+        '400':
+          $ref: '#/responses/400Error'
+        '401':
+          $ref: '#/responses/401Error'
+        '403':
+          $ref: '#/responses/403Error'
+        '404':
+          $ref: '#/responses/404Error'
+        '405':
+          $ref: '#/responses/405Error'
+        '406':
+          $ref: '#/responses/406Error'
+        '429':
+          $ref: '#/responses/429Error'
+        '500':
+          $ref: '#/responses/500Error'
+      security:
+        - PSUOAuth2Security:
+            - accounts
+  '/accounts/{AccountId}/parties':
+    get:
+      tags:
+        - Parties
+      summary: Get Parties
+      operationId: GetAccountsAccountIdParties
+      parameters:
+        - $ref: '#/parameters/AccountId'
+        - $ref: '#/parameters/x-fapi-auth-date'
+        - $ref: '#/parameters/x-fapi-customer-ip-address'
+        - $ref: '#/parameters/x-fapi-interaction-id'
+        - $ref: '#/parameters/Authorization'
+      responses:
+        '200':
+          $ref: '#/responses/200AccountsAccountIdPartiesRead'
+        '400':
+          $ref: '#/responses/400Error'
+        '401':
+          $ref: '#/responses/401Error'
+        '403':
+          $ref: '#/responses/403Error'
+        '404':
+          $ref: '#/responses/404Error'
+        '405':
+          $ref: '#/responses/405Error'
+        '406':
+          $ref: '#/responses/406Error'
+        '429':
+          $ref: '#/responses/429Error'
+        '500':
+          $ref: '#/responses/500Error'
+      security:
+        - PSUOAuth2Security:
+            - accounts
   /balances:
     get:
       tags:
@@ -139,6 +207,39 @@ paths:
       responses:
         '200':
           $ref: '#/responses/200TransactionsRead'
+        '400':
+          $ref: '#/responses/400Error'
+        '401':
+          $ref: '#/responses/401Error'
+        '403':
+          $ref: '#/responses/403Error'
+        '404':
+          $ref: '#/responses/404Error'
+        '405':
+          $ref: '#/responses/405Error'
+        '406':
+          $ref: '#/responses/406Error'
+        '429':
+          $ref: '#/responses/429Error'
+        '500':
+          $ref: '#/responses/500Error'
+      security:
+        - PSUOAuth2Security:
+            - accounts
+  /party:
+    get:
+      tags:
+        - Parties
+      summary: Get Parties
+      operationId: GetParty
+      parameters:
+        - $ref: '#/parameters/x-fapi-auth-date'
+        - $ref: '#/parameters/x-fapi-customer-ip-address'
+        - $ref: '#/parameters/x-fapi-interaction-id'
+        - $ref: '#/parameters/Authorization'
+      responses:
+        '200':
+          $ref: '#/responses/200PartyRead'
         '400':
           $ref: '#/responses/400Error'
         '401':
@@ -256,6 +357,30 @@ responses:
         description: An RFC4122 UID used as a correlation id.
     schema:
       $ref: '#/definitions/OBReadTransaction5'
+  200AccountsAccountIdPartiesRead:
+    description: Parties Read
+    headers:
+      x-fapi-interaction-id:
+        type: string
+        description: An RFC4122 UID used as a correlation id.
+    schema:
+      $ref: '#/definitions/OBReadParty3'
+  200AccountsAccountIdPartyRead:
+    description: Parties Read
+    headers:
+      x-fapi-interaction-id:
+        type: string
+        description: An RFC4122 UID used as a correlation id.
+    schema:
+      $ref: '#/definitions/OBReadParty2'
+  200PartyRead:
+    description: Parties Read
+    headers:
+      x-fapi-interaction-id:
+        type: string
+        description: An RFC4122 UID used as a correlation id.
+    schema:
+      $ref: '#/definitions/OBReadParty2'
   400Error:
     description: Bad request
     headers:
@@ -1083,6 +1208,215 @@ definitions:
             $ref: '#/definitions/OBActiveCurrencyAndAmount_SimpleType'
           Currency:
             $ref: '#/definitions/ActiveOrHistoricCurrencyCode_1'
+            
+  OBReadParty2:
+    type: object
+    required:
+      - Data
+    properties:
+      Data:
+        type: object
+        properties:
+          Party:
+            $ref: '#/definitions/OBParty2'
+      Links:
+        $ref: '#/definitions/Links'
+      Meta:
+        $ref: '#/definitions/Meta'    
+  OBReadParty3:
+    type: object
+    required:
+      - Data
+    properties:
+      Data:
+        type: object
+        properties:
+          Party:
+            type: array
+            items:
+              $ref: '#/definitions/OBParty2'
+      Links:
+        $ref: '#/definitions/Links'
+      Meta:
+        $ref: '#/definitions/Meta'
+  OBParty2:
+    type: object
+    required:
+      - PartyId
+    properties:
+      PartyId:
+        $ref: '#/definitions/PartyId'
+      PartyNumber:
+        $ref: '#/definitions/PartyNumber'
+      PartyType:
+        $ref: '#/definitions/OBExternalPartyType1Code'
+      Name:
+        $ref: '#/definitions/Name_1'
+      FullLegalName:
+        $ref: '#/definitions/FullLegalName'
+      LegalStructure:
+        $ref: '#/definitions/OBExternalLegalStructureType1Code'
+      BeneficialOwnership:
+        type: boolean
+      AccountRole:
+        $ref: '#/definitions/OBExternalAccountRole1Code'
+      EmailAddress:
+        $ref: '#/definitions/EmailAddress'
+      Phone:
+        $ref: '#/definitions/PhoneNumber_0'
+      Mobile:
+        $ref: '#/definitions/PhoneNumber_1'
+      Relationships:
+        $ref: '#/definitions/OBPartyRelationships1'
+      Address:
+        type: array
+        items:
+          type: object
+          description: Postal address of a party.
+          required:
+            - Country
+          properties:
+            AddressType:
+              $ref: '#/definitions/OBAddressTypeCode'
+            AddressLine:
+              type: array
+              items:
+                description: >-
+                  Information that locates and identifies a specific address, as
+                  defined by postal services, that is presented in free format
+                  text.
+                type: string
+                minLength: 1
+                maxLength: 70
+              minItems: 0
+              maxItems: 5
+            StreetName:
+              $ref: '#/definitions/StreetName'
+            BuildingNumber:
+              $ref: '#/definitions/BuildingNumber'
+            PostCode:
+              $ref: '#/definitions/PostCode'
+            TownName:
+              $ref: '#/definitions/TownName'
+            CountrySubDivision:
+              $ref: '#/definitions/CountrySubDivision'
+            Country:
+              $ref: '#/definitions/CountryCode'            
+            
+  PartyId:
+    description: >-
+      A unique and immutable identifier used to identify the customer resource.
+      This identifier has no meaning to the account owner.
+    type: string
+    minLength: 1
+    maxLength: 40
+  PartyNumber:
+    description: Number assigned by an agent to identify its customer.
+    type: string
+    minLength: 1
+    maxLength: 35
+  OBExternalPartyType1Code:
+    description: 'Party type, in a coded form.'
+    type: string
+    enum:
+      - Delegate
+      - Joint
+      - Sole
+  Name_1:
+    description: >-
+      Name by which a party is known and which is usually used to identify that
+      party.
+    type: string
+    minLength: 1
+    maxLength: 70
+  FullLegalName:
+    description: Specifies a character string with a maximum length of 350 characters.
+    type: string
+    minLength: 1
+    maxLength: 350
+  OBExternalLegalStructureType1Code:
+    description: Legal standing of the party.
+    type: string
+    x-namespaced-enum:
+      - UK.OBIE.CIC
+      - UK.OBIE.CIO
+      - UK.OBIE.Charity
+      - UK.OBIE.CoOp
+      - UK.OBIE.GeneralPartnership
+      - UK.OBIE.Individual
+      - UK.OBIE.LimitedLiabilityPartnership
+      - UK.OBIE.LimitedPartnership
+      - UK.OBIE.PrivateLimitedCompany
+      - UK.OBIE.PublicLimitedCompany
+      - UK.OBIE.ScottishLimitedPartnership
+      - UK.OBIE.Sole
+  OBExternalAccountRole1Code:
+    description: A party�s role with respect to the related account.
+    type: string
+    x-namespaced-enum:
+      - UK.OBIE.Administrator
+      - UK.OBIE.Beneficiary
+      - UK.OBIE.CustodianForMinor
+      - UK.OBIE.Granter
+      - UK.OBIE.LegalGuardian
+      - UK.OBIE.OtherParty
+      - UK.OBIE.PowerOfAttorney
+      - UK.OBIE.Principal
+      - UK.OBIE.Protector
+      - UK.OBIE.RegisteredShareholderName
+      - UK.OBIE.SecondaryOwner
+      - UK.OBIE.SeniorManagingOfficial
+      - UK.OBIE.Settlor
+      - UK.OBIE.SuccessorOnDeath
+  EmailAddress:
+    description: Address for electronic mail (e-mail).
+    type: string
+    minLength: 1
+    maxLength: 256
+  PhoneNumber_0:
+    description: >-
+      Collection of information that identifies a phone number, as defined by
+      telecom services.
+    type: string
+    pattern: '\+[0-9]{1,3}-[0-9()+\-]{1,30}'
+  PhoneNumber_1:
+    description: >-
+      Collection of information that identifies a mobile phone number, as
+      defined by telecom services.
+    type: string
+    pattern: '\+[0-9]{1,3}-[0-9()+\-]{1,30}'
+  OBPartyRelationships1:
+    type: object
+    description: The Party's relationships with other resources.
+    properties:
+      Account:
+        type: object
+        required:
+          - Related
+          - Id
+        description: Relationship to the Account resource.
+        properties:
+          Related:
+            description: Absolute URI to the related resource.
+            type: string
+            format: uri
+          Id:
+            description: >-
+              Unique identification as assigned by the ASPSP to uniquely
+              identify the related resource.
+            type: string
+            minLength: 1
+            maxLength: 40
+  CountryCode:
+    description: 'Nation with its own government, occupying a particular territory.'
+    type: string
+    pattern: '^[A-Z]{2,2}$'
+  CountrySubDivision:
+    description: 'Identifies a subdivision of a country eg, state, region, county.'
+    type: string
+    minLength: 1
+    maxLength: 35
+            
   PostCode:
     description: >-
       Identifier consisting of a group of letters and/or numbers that is added
