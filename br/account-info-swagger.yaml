@@ -1260,14 +1260,34 @@ definitions:
         type: boolean
       AccountRole:
         $ref: '#/definitions/OBExternalAccountRole1Code'
+      FatherName:
+        $ref: '#/definitions/FullLegalName'
+      MotherName:
+        $ref: '#/definitions/FullLegalName'
+      Nationality:
+        $ref: '#/definitions/Nationality'
+      BirthDate:
+        $ref: '#/definitions/BirthDate'
+      BirthPlace:
+        $ref: '#/definitions/BirthPlace'
+      Gender:
+        $ref: '#/definitions/Gender'
+      MaritalStatus:
+        $ref: '#/definitions/MaritalStatus'
+      Spouse:
+        $ref: '#/definitions/Spouse'
+      Occupation:
+        $ref: '#/definitions/Occupation'
+      DocumentID:
+        $ref: '#/definitions/DocumentID'
+      CPF:
+        $ref: '#/definitions/CPF'
       EmailAddress:
         $ref: '#/definitions/EmailAddress'
       Phone:
         $ref: '#/definitions/PhoneNumber_0'
       Mobile:
         $ref: '#/definitions/PhoneNumber_1'
-      Relationships:
-        $ref: '#/definitions/OBPartyRelationships1'
       Address:
         type: array
         items:
@@ -1371,8 +1391,7 @@ definitions:
   EmailAddress:
     description: Address for electronic mail (e-mail).
     type: string
-    minLength: 1
-    maxLength: 256
+    format: email
   PhoneNumber_0:
     description: >-
       Collection of information that identifies a phone number, as defined by
@@ -1385,28 +1404,6 @@ definitions:
       defined by telecom services.
     type: string
     pattern: '\+[0-9]{1,3}-[0-9()+\-]{1,30}'
-  OBPartyRelationships1:
-    type: object
-    description: The Party's relationships with other resources.
-    properties:
-      Account:
-        type: object
-        required:
-          - Related
-          - Id
-        description: Relationship to the Account resource.
-        properties:
-          Related:
-            description: Absolute URI to the related resource.
-            type: string
-            format: uri
-          Id:
-            description: >-
-              Unique identification as assigned by the ASPSP to uniquely
-              identify the related resource.
-            type: string
-            minLength: 1
-            maxLength: 40
   CountryCode:
     description: 'Nation with its own government, occupying a particular territory.'
     type: string
@@ -1416,7 +1413,70 @@ definitions:
     type: string
     minLength: 1
     maxLength: 35
-            
+  Nationality:
+    description: 'Identifies a owner nationality'
+    type: string
+    minLength: 1
+    maxLength: 35
+  BirthDate:
+    description: 'Identifies a owner BirthDate'
+    type: string
+    format: date
+  BirthPlace:
+    description: 'Identifies a owner BirthPlace'
+    type: string
+    minLength: 1
+    maxLength: 35
+  Gender:
+    description: 'Identifies a owner Gender'
+    type: string
+    minLength: 1
+    maxLength: 35
+  MaritalStatus:
+    description: 'Identifies a owner MaritalStatus'
+    type: string
+    minLength: 1
+    maxLength: 35
+  Spouse:
+    description: 'Identifies a owner spouse name'
+    type: string
+    minLength: 1
+    maxLength: 35
+  Occupation:
+    description: 'Identifies a owner Occupation'
+    type: string
+    minLength: 1
+    maxLength: 35
+  DocumentID:
+    type: object
+    required:
+      - Code
+    description: Identification document
+    properties:
+      Type:
+        description: Document type (Like RG or RNE)
+        type: string
+        minLength: 1
+        maxLength: 35
+      Number:
+        description: Document Number
+        type: string
+        minLength: 1
+        maxLength: 35
+      Issuer:
+        description: Identification of the issuer of document.
+        type: string
+        minLength: 1
+        maxLength: 35
+      IssueDate:
+        description: Document issue date.
+        type: string
+        format: date
+  CPF:
+    description: 'Identifies a owner CPF'
+    type: string
+    pattern: '^\d{3}\.?\d{3}\.?\d{3}\-?\d{2}$'
+
   PostCode:
     description: >-
       Identifier consisting of a group of letters and/or numbers that is added
