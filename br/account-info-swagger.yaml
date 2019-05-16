@@ -1,16 +1,16 @@
 swagger: '2.0'
 info:
-  title: Account and Transaction API Specification
-  description: Swagger for Account and Transaction API Specification
+  title: Account and Transaction API Specification BR (POC ABBC+ABCD)
+  description: Swagger for Account and Transaction API Specification BR (POC ABBC+ABCD)
   termsOfService: 'https://www.openbanking.org.uk/terms'
   contact:
-    name: Service Desk
-    email: ServiceDesk@openbanking.org.uk
+    name: ABBC/ABCD
+    email: none@none.com.br
   license:
     name: open-licence
     url: 'https://www.openbanking.org.uk/open-licence'
-  version: v3.1.2-RC1
-basePath: /open-banking-br/v3.1-br/aisp
+  version: v3.1.2-RC1-BR-POC
+basePath: /open-banking-br/v3.1-br-poc
 schemes:
   - https
 consumes:
