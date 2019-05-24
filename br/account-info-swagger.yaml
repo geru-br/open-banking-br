@@ -208,10 +208,10 @@ parameters:
     type: string
     required: false
     description: >-
-      The time when the PSU last logged in with the TPP. 
+      The time when the PSU last logged in with the TPP.
 
       All dates in the HTTP headers are represented as RFC 7231 Full Dates. An
-      example is below: 
+      example is below:
 
       Sun, 10 Sep 2017 19:43:31 UTC
     pattern: >-
@@ -398,7 +398,7 @@ definitions:
 
       Usage: Booking date is the expected booking date, unless the status is
       booked, in which case it is the actual booking date.All dates in the JSON
-      payloads are represented in ISO 8601 date-time format. 
+      payloads are represented in ISO 8601 date-time format.
 
       All date-time fields in responses must include the timezone. An example is
       below:
@@ -414,7 +414,7 @@ definitions:
   ISODateTime:
     description: >-
       All dates in the JSON payloads are represented in ISO 8601 date-time
-      format. 
+      format.
 
       All date-time fields in responses must include the timezone. An example is
       below:
@@ -620,7 +620,7 @@ definitions:
       - Debit
   OBCreditDebitCode_2:
     description: |-
-      Indicates whether the balance is a credit or a debit balance. 
+      Indicates whether the balance is a credit or a debit balance.
       Usage: A zero balance is considered to be a credit balance.
     type: string
     enum:
@@ -670,7 +670,7 @@ definitions:
       QuotationDate:
         description: >-
           Date and time at which an exchange rate is quoted.All dates in the
-          JSON payloads are represented in ISO 8601 date-time format. 
+          JSON payloads are represented in ISO 8601 date-time format.
 
           All date-time fields in responses must include the timezone. An
           example is below:
@@ -905,7 +905,7 @@ definitions:
                   description: >-
                     Indicates the date (and time) of the balance.All dates in
                     the JSON payloads are represented in ISO 8601 date-time
-                    format. 
+                    format.
 
                     All date-time fields in responses must include the timezone.
                     An example is below:
@@ -1114,7 +1114,7 @@ definitions:
             $ref: '#/definitions/OBActiveCurrencyAndAmount_SimpleType'
           Currency:
             $ref: '#/definitions/ActiveOrHistoricCurrencyCode_1'
-            
+
   OBReadParty2:
     type: object
     required:
@@ -1128,7 +1128,7 @@ definitions:
       Links:
         $ref: '#/definitions/Links'
       Meta:
-        $ref: '#/definitions/Meta'    
+        $ref: '#/definitions/Meta'
   OBReadParty3:
     type: object
     required:
@@ -1227,8 +1227,8 @@ definitions:
             CountrySubDivision:
               $ref: '#/definitions/CountrySubDivision'
             Country:
-              $ref: '#/definitions/CountryCode'            
-            
+              $ref: '#/definitions/CountryCode'
+
   PartyId:
     description: >-
       A unique and immutable identifier used to identify the customer resource.
@@ -1417,7 +1417,7 @@ definitions:
   SecondaryIdentification:
     description: >-
       This is secondary identification of the account, as assigned by the
-      account servicing institution. 
+      account servicing institution.
 
       This can be used by building societies to additionally identify accounts
       with a roll number (in addition to a sort code and account number
@@ -1451,7 +1451,7 @@ definitions:
     maxLength: 210
   TransactionInformation:
     description: |-
-      Further details of the transaction. 
+      Further details of the transaction.
       This is the transaction narrative, which is unstructured text.
     type: string
     minLength: 1
@@ -1477,7 +1477,7 @@ definitions:
       availability information is provided, the value date must not be used. In
       this case the availability component identifies the number of availability
       days.All dates in the JSON payloads are represented in ISO 8601 date-time
-      format. 
+      format.
 
       All date-time fields in responses must include the timezone. An example is
       below:
