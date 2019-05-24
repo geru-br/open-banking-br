@@ -20,111 +20,7 @@ produces:
   - application/json; charset=utf-8
   - application/jose+jwe
 paths:
-  '/accounts/{AccountId}/balances':
-    get:
-      tags:
-        - Balances
-      summary: Get Balances
-      operationId: GetAccountsAccountIdBalances
-      parameters:
-        - $ref: '#/parameters/AccountId'
-        - $ref: '#/parameters/x-fapi-auth-date'
-        - $ref: '#/parameters/x-fapi-customer-ip-address'
-        - $ref: '#/parameters/x-fapi-interaction-id'
-        - $ref: '#/parameters/Authorization'
-      responses:
-        '200':
-          $ref: '#/responses/200AccountsAccountIdBalancesRead'
-        '400':
-          $ref: '#/responses/400Error'
-        '401':
-          $ref: '#/responses/401Error'
-        '403':
-          $ref: '#/responses/403Error'
-        '404':
-          $ref: '#/responses/404Error'
-        '405':
-          $ref: '#/responses/405Error'
-        '406':
-          $ref: '#/responses/406Error'
-        '429':
-          $ref: '#/responses/429Error'
-        '500':
-          $ref: '#/responses/500Error'
-      security:
-        - PSUOAuth2Security:
-            - accounts
-  '/accounts/{AccountId}/transactions':
-    get:
-      tags:
-        - Transactions
-      summary: Get Transactions
-      operationId: GetAccountsAccountIdTransactions
-      parameters:
-        - $ref: '#/parameters/AccountId'
-        - $ref: '#/parameters/x-fapi-auth-date'
-        - $ref: '#/parameters/x-fapi-customer-ip-address'
-        - $ref: '#/parameters/x-fapi-interaction-id'
-        - $ref: '#/parameters/Authorization'
-        - $ref: '#/parameters/FromBookingDateTimeParam'
-        - $ref: '#/parameters/ToBookingDateTimeParam'
-      responses:
-        '200':
-          $ref: '#/responses/200AccountsAccountIdTransactionsRead'
-        '400':
-          $ref: '#/responses/400Error'
-        '401':
-          $ref: '#/responses/401Error'
-        '403':
-          $ref: '#/responses/403Error'
-        '404':
-          $ref: '#/responses/404Error'
-        '405':
-          $ref: '#/responses/405Error'
-        '406':
-          $ref: '#/responses/406Error'
-        '429':
-          $ref: '#/responses/429Error'
-        '500':
-          $ref: '#/responses/500Error'
-      security:
-        - PSUOAuth2Security:
-            - accounts
-  '/accounts/{AccountId}/party':
-    get:
-      tags:
-        - Parties
-      summary: Get Parties
-      operationId: GetAccountsAccountIdParty
-      parameters:
-        - $ref: '#/parameters/AccountId'
-        - $ref: '#/parameters/x-fapi-auth-date'
-        - $ref: '#/parameters/x-fapi-customer-ip-address'
-        - $ref: '#/parameters/x-fapi-interaction-id'
-        - $ref: '#/parameters/Authorization'
-      responses:
-        '200':
-          $ref: '#/responses/200AccountsAccountIdPartyRead'
-        '400':
-          $ref: '#/responses/400Error'
-        '401':
-          $ref: '#/responses/401Error'
-        '403':
-          $ref: '#/responses/403Error'
-        '404':
-          $ref: '#/responses/404Error'
-        '405':
-          $ref: '#/responses/405Error'
-        '406':
-          $ref: '#/responses/406Error'
-        '429':
-          $ref: '#/responses/429Error'
-        '500':
-          $ref: '#/responses/500Error'
-      security:
-        - PSUOAuth2Security:
-            - accounts
-  '/accounts/{AccountId}/parties':
+  /parties:
     get:
       tags:
         - Parties
@@ -136,6 +32,7 @@ paths:
         - $ref: '#/parameters/x-fapi-customer-ip-address'
         - $ref: '#/parameters/x-fapi-interaction-id'
         - $ref: '#/parameters/Authorization'
+        - $ref: '#/parameters/x-bank-number'
       responses:
         '200':
           $ref: '#/responses/200AccountsAccountIdPartiesRead'
@@ -169,6 +66,7 @@ paths:
         - $ref: '#/parameters/x-fapi-customer-ip-address'
         - $ref: '#/parameters/x-fapi-interaction-id'
         - $ref: '#/parameters/Authorization'
+        - $ref: '#/parameters/x-bank-number'
       responses:
         '200':
           $ref: '#/responses/200BalancesRead'
@@ -204,6 +102,7 @@ paths:
         - $ref: '#/parameters/Authorization'
         - $ref: '#/parameters/FromBookingDateTimeParam'
         - $ref: '#/parameters/ToBookingDateTimeParam'
+        - $ref: '#/parameters/x-bank-number'
       responses:
         '200':
           $ref: '#/responses/200TransactionsRead'
@@ -237,6 +136,7 @@ paths:
         - $ref: '#/parameters/x-fapi-customer-ip-address'
         - $ref: '#/parameters/x-fapi-interaction-id'
         - $ref: '#/parameters/Authorization'
+        - $ref: '#/parameters/x-bank-number'
       responses:
         '200':
           $ref: '#/responses/200PartyRead'
@@ -324,6 +224,12 @@ parameters:
     type: string
     required: false
     description: An RFC4122 UID used as a correlation id.
+  x-bank-number:
+    in: header
+    name: x-bank-number
+    type: string
+    required: true
+    pattern: '\d{3}'
 responses:
   200AccountsAccountIdBalancesRead:
     description: Balances Read
@@ -1430,13 +1336,19 @@ definitions:
   Gender:
     description: 'Identifies a owner Gender'
     type: string
-    minLength: 1
-    maxLength: 35
+    enum:
+      - Male
+      - Female
+      - Other
   MaritalStatus:
     description: 'Identifies a owner MaritalStatus'
     type: string
-    minLength: 1
-    maxLength: 35
+    enum:
+      - Married
+      - Single
+      - Widon
+      - Divorced
+      - Other
   Spouse:
     description: 'Identifies a owner spouse name'
     type: string
@@ -1573,3 +1485,4 @@ definitions:
       2017-04-05T10:43:07+00:00
     type: string
     format: date-time
+
